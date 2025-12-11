@@ -3,26 +3,26 @@ import TodoItem from "./TodoItem";
 
 interface TodoListProps {
   todos: Todo[];
-  toggleTodo: (id: number) => void;
+  handleToggleTodo: (id: number) => void;
   handleDeleteTodo: (id: number) => void;
 }
 
 export default function TodoList({
   todos,
-  toggleTodo,
+  handleToggleTodo,
   handleDeleteTodo,
 }: TodoListProps) {
   return (
     <div>
-      <ul>
+      <ul className="flex flex-col gap-2">
         {todos.length === 0 && <li>No todos</li>}
 
         {todos.map((todo) => (
           <TodoItem
-						key={todo.id}
+            key={todo.id}
             todo={todo}
-            toggleTodo={toggleTodo}
-            handleDeleteTodo={handleDeleteTodo}
+            onToggleTodo={handleToggleTodo}
+            onDeleteTodo={handleDeleteTodo}
           />
         ))}
       </ul>

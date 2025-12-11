@@ -17,12 +17,12 @@ function App() {
     if (!todoText.trim()) return;
 
     setTodos((prev) => [
-      ...prev,
       {
         id: Date.now(),
         text: todoText,
         completed: false,
       },
+      ...prev,
     ]);
     setTodoText("");
   }
@@ -32,7 +32,7 @@ function App() {
     setTodos(newTodos);
   }
 
-  function toggleTodo(id: number): void {
+  function handleToggleTodo(id: number): void {
     setTodos((prev) =>
       prev.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo,
@@ -41,20 +41,22 @@ function App() {
   }
 
   return (
-    <>
-      <p>Welcome to your first TypeScript + React App</p>
-      <TodoHeader />
-      <TodoInput
-				todoText={todoText}
-				setTodoText={setTodoText}
-				handleAddTodo={handleAddTodo}
-			/>
-			<TodoList 
-				todos={todos}
-				toggleTodo={toggleTodo}
-				handleDeleteTodo={handleDeleteTodo}
-			/>
-    </>
+    <div className="min-h-screen items-center justify-center flex flex-col bg-linear-to-br from-[#3b0b59] via-[#0f172a] to-black p-4">
+      <div className="w-full max-w-md bg-white/10 backdrop-blur-md rounded-xl shadow-2xl p-6 space-y-4">
+        <p className="text-center">My first TypeScript + React App</p>
+        <TodoHeader />
+        <TodoInput
+          todoText={todoText}
+          setTodoText={setTodoText}
+          handleAddTodo={handleAddTodo}
+        />
+        <TodoList
+          todos={todos}
+          handleToggleTodo={handleToggleTodo}
+          handleDeleteTodo={handleDeleteTodo}
+        />
+      </div>
+    </div>
   );
 }
 
